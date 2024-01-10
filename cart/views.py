@@ -86,10 +86,14 @@ def remove_from_cart(request,pk):
             order_item=OrderItem.objects.filter(item=item,user=request.user,ordered=False)[0]
 
             order.items.remove(order_item)
+            messages.info(request, "Book Removed From Your Cart!")
+
         else:
+            messages.info(request, "This Book Was Not In Your Cart!")
 
             return redirect('book-detail',pk=pk)
     else:
+        messages.info(request, "You Dont Have an Active Order!")
         return redirect('book-detail',pk=pk)
 
     return redirect('book-detail',pk=pk)
