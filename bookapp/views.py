@@ -7,6 +7,7 @@ from django.views.generic import ListView,DetailView
 
 class HomeVeiws(ListView):
     model=Item
+    paginate_by=4
     template_name="home-page.html"
     context_object_name='items'
     def get_queryset(self):
@@ -15,6 +16,8 @@ class HomeVeiws(ListView):
 class BookDetail(DetailView):
     model=Item
     template_name="book_detail.html"
+def about_us(request):
+    return render(request, 'aboutus.html')
 
 def check_out(request):
     return render(request, 'checkout-page.html')

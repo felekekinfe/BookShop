@@ -88,7 +88,7 @@ footer a {
       {% if user.is_authenticated %}
         <li><a class="dropdown-item" href="{% url 'profile_edit' %}">Edit Profile</a></li>
         <li><a class="dropdown-item" href="{% url 'change_password' %}">Edit Password</a></li>
-        <li><a class="dropdown-item" href="#">About Us</a></li>
+        <li><a class="dropdown-item" href="{% url 'about-us' %}">About Us</a></li>
         <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
       {% else %}
         <li><a class="dropdown-item" href="{% url 'login_page' %}">Login</a></li>
