@@ -16,6 +16,11 @@ class HomeVeiws(ListView):
 class BookDetail(DetailView):
     model=Item
     template_name="book_detail.html"
+
+class OrderSummary(DetailView):
+    model=Order
+    template_name='order_summary.html'
+    
 def about_us(request):
     return render(request, 'aboutus.html')
 

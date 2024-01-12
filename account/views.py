@@ -147,9 +147,7 @@ def logout(request):
 
 
 
-
-
-
+@login_required(login_url="home")
 def profile_edit(request):
     if request.user.is_authenticated:
         if request.POST:
@@ -200,6 +198,7 @@ def profile_edit(request):
 
 
 
+@login_required(login_url="home")
 def change_passwword(request):
     if request.POST:
         password = request.POST['password']
