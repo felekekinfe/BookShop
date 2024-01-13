@@ -1,0 +1,39 @@
+{% extends 'base1.html' %}
+
+{% block content %}
+
+<div class="table-responsive text-nowrap">
+    <h2>Order Summary</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Book title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total book price</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in orders.items.all %}
+        <tr>
+          <th scope="row">1</th>
+          <td>{{book.item.title}}</td>
+          <td>{{book.item.price}}</td>
+          <td>{{book.quantity}}</td>
+          <td>
+            {% if book.item.discount_price %}
+                {{book.total_discount}}Birr
+              {% else %}
+                {{book.total_price}}Birr
+            {% endif %}
+          </td>
+          <td>Cell</td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endblock content %}

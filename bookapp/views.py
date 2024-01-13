@@ -1,8 +1,10 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Item,OrderItem,Order
 from django.shortcuts import redirect
-
-from django.views.generic import ListView,DetailView
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView,DetailView,View
 # Create your views here.
 
 class HomeVeiws(ListView):
@@ -17,10 +19,17 @@ class BookDetail(DetailView):
     model=Item
     template_name="book_detail.html"
 
-class OrderSummary(DetailView):
-    model=Order
-    template_name='order_summary.html'
+class OrderSummary(LoginRequiredMixin,View):
+    def get(self,*args,**kwargs):
+        try:
+            order=Order.objects.get(user=self.request.user,ordered=False)
+
+            return render(self.request, 'order_summary.html',{'orders':order})
     
+        except ObjectDoesNotExist():
+            messages.error(self.request,'you dont have active order')
+
+        
 def about_us(request):
     return render(request, 'aboutus.html')
 
