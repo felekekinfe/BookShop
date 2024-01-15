@@ -18,22 +18,57 @@
       <tbody>
         {% for book in orders.items.all %}
         <tr>
-          <th scope="row">1</th>
+          <th scope="row">{{forloop.counter}}</th>
           <td>{{book.item.title}}</td>
           <td>{{book.item.price}}</td>
-          <td>{{book.quantity}}</td>
+          <td>
+            <a href="{% url 'remove-single-book' book.item.id %}">
+
+              <i class="fa fa-minus mr-3" aria-hidden="true"></i>
+              </a>
+            {{book.quantity}}
+            <a href="{% url 'add-single-book' book.item.id %}">
+              <i class="fa fa-plus ml-3" aria-hidden="true"></i></a>
+          </td>
           <td>
             {% if book.item.discount_price %}
-                {{book.total_discount}}Birr
+                {{book.total_price}}Birr
+                <span class="badge badge-primary">Saved{{book.total_discount}} birr</span>
               {% else %}
                 {{book.total_price}}Birr
             {% endif %}
+
+            <a style="color: red" href="{% url 'remove-from-cart' book.item.id %}"><i class="fa fa-trash ml-3" aria-hidden="true"></i></a>
           </td>
-          <td>Cell</td>
+          
+          
           
         </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5"> Your Cart is badooo</td>
+        </tr>
+        <tr> 
+          <td colspan="5"> 
+            <a class="btn btn-primary float-right" href="/">Continue Shoping</a></td>
+          <td> 
+        </tr>
         {% endfor %}
-      </tbody>
+        {% if orders.over_all_total_price %}
+        <tr>
+          <td colspan="4"><b>Order Total</b></td>
+          <td>{{orders.over_all_total_price}}</td>
+        </tr>
+
+        <tr>
+          <td colspan="5">
+            <a class="btn btn-warning float-right ml-2" href="checkoutpage">Proceed ro checkout</a>
+            <a class="btn btn-primary float-right" href="/">Continue Shoping</a></td>
+          
+        </tr>
+        {% endif %}
+        
+      </tbody>  
     </table>
   </div>
   {% endblock content %}

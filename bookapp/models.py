@@ -24,6 +24,7 @@ LABEL=(
     ('sh','Self Help')
 )
 
+
 # Create your models here.
 class Item(models.Model):
     
@@ -60,23 +61,33 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.item.title
-    def total_price(self):
-        return self.item.price * self.quantity
+    
     def total_discount(self):
         return self.quantity*self.item.discount_price
+    def total_price(self):
+        return self.item.price * self.quantity-self.total_discount()
     
+
+
+
 class Order(models.Model):
     user=models.ForeignKey(Account, on_delete=models.CASCADE)
     items=models.ManyToManyField(OrderItem)
     start_date=models.DateTimeField(auto_now_add=True)
     ordered_date=models.DateTimeField(auto_now_add=True)
     ordered=models.BooleanField(default=False)
+   
 
     
     
 
 
+    def over_all_total_price(self):
+        total=0
+        for order_book in self.items.all():
+            total+=order_book.total_price()
 
+        return total
 
 
 

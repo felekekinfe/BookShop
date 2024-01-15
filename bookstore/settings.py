@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'account',
     'bookapp',
     'cart',
-    'search'
+    'search',
+    'django_countries',
+    'crispy_forms',
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -124,6 +127,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT=BASE_DIR/'media'
 MEDIA_URL='/media/'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 
 

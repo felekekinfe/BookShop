@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Item,OrderItem,Order
 from django.shortcuts import redirect
+from .forms import CheckoutForm
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -18,6 +19,20 @@ class HomeVeiws(ListView):
 class BookDetail(DetailView):
     model=Item
     template_name="book_detail.html"
+
+class CheckoutView(View):
+
+    def get(self,*args,**kwargs):
+        form=CheckoutForm()
+        context={
+            'form':form
+        }
+        return render(self.request, "checkout-page.html", context)
+    def post(self,*args,**kwargs):
+        form=CheckoutForm(self.request.POST or None)
+        if form.is_valid():
+            print('form is valid')
+            return redirect('checkout')
 
 class OrderSummary(LoginRequiredMixin,View):
     def get(self,*args,**kwargs):
