@@ -89,7 +89,9 @@ footer a {
         <li><a class="dropdown-item" href="{% url 'change_password' %}">Edit Password</a></li>
         <li><a class="dropdown-item" href="{% url 'about-us' %}">About Us</a></li>
         <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
-        <li><a class="dropdown-item" href="">admin</a></li>
+        {% if user.is_staff %}
+        <li><a class="dropdown-item" href="admin/">admin</a></li>
+        {% endif %}
       {% else %}
         <li><a class="dropdown-item" href="{% url 'login_page' %}">Login</a></li>
         <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
@@ -157,5 +159,6 @@ footer a {
 </nav>
 
 
-
+{% block extra_head %}{% endblock extra_head %}
 {% block content %}{% endblock content %}
+{% block extra_scripts %}{% endblock extra_scripts %}

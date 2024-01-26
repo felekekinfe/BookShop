@@ -44,7 +44,16 @@ INSTALLED_APPS = [
     'django_countries',
     'crispy_forms',
     "crispy_bootstrap4",
+    "django_chapa",
+    "admin_interface",
+    'colorfield'
 ]
+
+CHAPA_SECRET = "CHAPUBK_TEST-hil3TopFGmNl8N6qXiOGl0MLGDVsBZeu"
+CHAPA_API_URL = 'https://api.chapa.co'
+
+CHAPA_API_VERSION = 'v1'
+CHAPA_TRANSACTION_MODEL = 'django_chapa.chapa_model'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

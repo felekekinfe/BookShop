@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from account.models import Account
 from django.urls import reverse
+from django_countries.fields import CountryField
 CATEGORY=(
     ('fi','Fiction'),
     ('sc-tech','Science & Technology'),
@@ -68,7 +69,7 @@ class OrderItem(models.Model):
         return self.item.price * self.quantity-self.total_discount()
     
 
-
+ 
 
 class Order(models.Model):
     user=models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -76,7 +77,11 @@ class Order(models.Model):
     start_date=models.DateTimeField(auto_now_add=True)
     ordered_date=models.DateTimeField(auto_now_add=True)
     ordered=models.BooleanField(default=False)
-   
+    billing_address=models.ForeignKey("BillingAddress", on_delete=models.SET_NULL, blank=True,null=True)
+
+    
+    def __str__(self):
+        return self.user.username
 
     
     
@@ -94,14 +99,19 @@ class Order(models.Model):
 
 
 
+class BillingAddress(models.Model):
+    user=models.ForeignKey(Account, on_delete=models.CASCADE)
 
 
 
 
+    street_address=models.CharField(max_length=100)
+    house_address=models.CharField(max_length=100)
+    countries=CountryField(multiple=True)
+    zip_code=models.CharField(max_length=100)
 
-
-
-
+    def __str__(self):
+        return self.user.username
 
 
 

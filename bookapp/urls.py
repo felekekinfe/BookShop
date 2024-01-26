@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomeVeiws,BookDetail,about_us,OrderSummary,CheckoutView
+from .views import HomeVeiws,BookDetail,about_us,OrderSummary,CheckoutView,PaymentView
 
 from django.contrib import admin
 
@@ -12,5 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls,name='admin'),
     path('aboutUs/',about_us,name='about-us'),
     path('book-detail/<int:pk>',BookDetail.as_view(),name='book-detail'),
+
+    path('payment/<payment_option>/',PaymentView.as_view(),name='payment')
    
 ]
