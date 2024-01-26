@@ -1,16 +1,18 @@
 from django.contrib import admin
+from admin_interface.models import Theme
 from .models import Item,Order,OrderItem,BillingAddress,Account
 # Register your models here.
 
 class CustomAdminSite(admin.AdminSite):
-    site_header=''
-    index_title='index'
+    site_header='Adminstration Page'
+    
+    index_template=''
 
 
 
 custom=CustomAdminSite(name='customadmin')
 custom.register(Account)
-admin.site.register(Order)
+custom.register(Order)
 
 @admin.register(BillingAddress)
 class PersonAdmin(admin.ModelAdmin):

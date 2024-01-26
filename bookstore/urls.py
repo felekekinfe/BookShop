@@ -20,7 +20,7 @@ from django.conf import settings
 from bookapp.admin import custom
 
 urlpatterns = [
-    path('chapa-webhook', include('django_chapa.urls')),
+    path('chapa-webhook', include('dj_chapa.urls')),
     path('admin/',custom.urls),
     path('',include('bookapp.urls')),
     path('',include('cart.urls')),

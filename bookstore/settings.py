@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=akyxil2pj0zayyf9ykvoit=77r#p@u0dd0zb!6#b9iefv8s#t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cc36-196-189-183-217.ngrok.io', '*']
 
 
 # Application definition
@@ -44,16 +44,19 @@ INSTALLED_APPS = [
     'django_countries',
     'crispy_forms',
     "crispy_bootstrap4",
-    "django_chapa",
+    "dj_chapa",
     "admin_interface",
     'colorfield'
 ]
 
-CHAPA_SECRET = "CHAPUBK_TEST-hil3TopFGmNl8N6qXiOGl0MLGDVsBZeu"
-CHAPA_API_URL = 'https://api.chapa.co'
 
+CHAPA_SECRET = "CHAPUBK_TEST-hil3TopFGmNl8N6qXiOGl0MLGDVsBZeu"
+CHAPA_API_URL =  'https://api.chapa.co'
+CHAPA_WEBHOOK_URL = 'CHAPA_WEBHOOK_URL'
 CHAPA_API_VERSION = 'v1'
-CHAPA_TRANSACTION_MODEL = 'django_chapa.chapa_model'
+CHAPA_TRANSACTION_MODEL = 'dj_chapa.ChapaTransaction'
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
