@@ -103,7 +103,10 @@ class OrderSummary(LoginRequiredMixin,View,ObjectDoesNotExist):
 
             return render(self.request, 'order_summary.html',{'orders':order})
     
-        except ObjectDoesNotExist():
+        except ObjectDoesNotExist:
+            order=Order.objects.get(user=self.request.user,ordered=False)
+
+            return render(self.request, 'order_summary.html',{'orders':order})
             messages.error(self.request,'you dont have active order')
 
         

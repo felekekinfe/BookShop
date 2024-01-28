@@ -1,6 +1,26 @@
 {% load cart_template_tags %}
+{% load static %}
+
+
 
 <style>
+    .navbar {
+        padding-top: 0.5rem; 
+        padding-bottom: 0.1rem; 
+    }
+
+    .navbar-brand {
+        padding: 20px; 
+       
+    }
+
+    .navbar-brand img {
+        max-height: 20px; 
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1rem; 
+    }
 
 .bloc_left_price {
     color: #c01508;
@@ -109,15 +129,19 @@ footer a {
     <!-- ... (previous code) ... -->
 
 <div class="container">
-    <a class="navbar-brand" href="index.html">fse</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    
+    <div class="container" > <!-- Increase the margin-top value -->
+        <a class="" href="{% url 'home' %}">
+            <img src="{% static 'book-clipart-transparent-17.png' %}" alt="Logo" width='100' height='70'>
+        </a>
+    </div>
+    
+    
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
         <ul class="navbar-nav m-auto">
             <li class="nav-item m-auto">
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                <b><a class="nav-link" href="{% url 'home' %}">Home</a></b>
             </li>
             
             {% comment %} <li class="nav-item dropdown">
@@ -150,15 +174,49 @@ footer a {
                 </div>
                 
             </form>
+            {% if request.user.is_authenticated %}
             <a class="btn btn-success btn-sm ml-3" href="{% url 'order_summary' %}">
-                <i class="fa fa-shopping-cart"></i> Cart
+                <i class="fa fa-shopping-cart"></i> <b>Cart</b>
                 <span class="badge badge-light">{{request.user|cart_book_count}}</span>
             </a>
+            {% else %}
+            <a class="btn btn-success btn-sm ml-3" href="{% url 'home' %}">
+                <i class="fa fa-shopping-cart"></i> <b>Cart</b>
+                <span class="badge badge-light">{{request.user|cart_book_count}}</span>
+            </a>
+            {% endif %}
         </div>
     </div>
 </nav>
 
 
-{% block extra_head %}{% endblock extra_head %}
-{% block content %}{% endblock content %}
-{% block extra_scripts %}{% endblock extra_scripts %}
+
+{% block content %}
+
+{% endblock content %}
+
+<!-- Remove the container if you want to extend the Footer to full width. -->
+
+
+    
+  <!-- End of .container -->
+
+  <!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container my-4">
+
+    <footer class="bg-white text-center text-gray">
+    <!-- Grid container -->
+  
+      
+    </div>
+    
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2024 Copyright: <b>Made with <span style="color: red;">❤</span></b>
+    </div>
+    <!-- Copyright -->
+  </footer>
+    
+  </div>
+  <!-- End of .container -->
+
+

@@ -20,15 +20,21 @@ CATEGORY=(
 
 
 
+
 # Create your models here.
 class Item(models.Model):
     
     title=models.CharField(max_length=100)
     author=models.CharField(max_length=100)
+    label = models.CharField(
+        max_length=100,
+        choices=CATEGORY,
+        default='Unknown' 
+    )
 
     description=models.TextField(blank=True,null=True)
-    price=models.FloatField()
-    discount_price=models.FloatField(blank=True,null=True)
+    price=models.FloatField(default=0.0)
+    discount_price=models.FloatField(blank=True,null=True,default=0)
     category=models.CharField(choices=CATEGORY, max_length=100)
 
     image=models.ImageField(upload_to='book_image/')
@@ -57,11 +63,16 @@ class OrderItem(models.Model):
     def __str__(self):
         return self.item.title
     
+   
+
     def total_discount(self):
-        return self.quantity*self.item.discount_price
+        if self.item.discount_price is None:
+            return 0
+        return self.quantity * self.item.discount_price
+
     def total_price(self):
-        return self.item.price * self.quantity-self.total_discount()
-    
+        return self.item.price * self.quantity - self.total_discount()
+
 
  
 

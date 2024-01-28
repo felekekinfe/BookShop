@@ -1,16 +1,17 @@
 {% extends 'base1.html' %}
-
 {% load static %}
+
+
+
 {% block content %}
 
-<style>
-  @media (max-width: 767.98px) { .border-sm-start-none { border-left: none !important; } }
-</style>
+
+
 {% if books %}
 {% for book in books%}
 <section style="background-color: #eee;">
   
-    <div class="row justify-content-center mb-3">
+    
       <div class="col-md-12 col-xl-10">
         <div class="card shadow-0 border rounded-3">
           <div class="card-body">
@@ -27,33 +28,16 @@
               </div>
               <div class="col-md-6 col-lg-6 col-xl-6">
                 <h5>{{book.title}}</h5>
-                <div class="d-flex flex-row">
-                  <div class="text-danger mb-1 me-2">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <span>289</span>
-                </div>
+               
                 <div class="mt-1 mb-0 text-muted small">
-                  <span>100% cotton</span>
+                  <span>{{book.author}}</span>
                   <span class="text-primary"> • </span>
-                  <span>Light weight</span>
-                  <span class="text-primary"> • </span>
-                  <span>Best finish<br /></span>
+                  <span>{{book.category}}</span>
+                  
                 </div>
-                <div class="mb-2 text-muted small">
-                  <span>Unique design</span>
-                  <span class="text-primary"> • </span>
-                  <span>For men</span>
-                  <span class="text-primary"> • </span>
-                  <span>Casual<br /></span>
-                </div>
+               
                 <p class="text-truncate mb-4 mb-md-0">
-                  There are many variations of passages of Lorem Ipsum available, but the
-                  majority have suffered alteration in some form, by injected humour, or
-                  randomised words which don't look even slightly believable.
+                  {{book.description}}
                 </p>
               </div>
               <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
@@ -71,7 +55,7 @@
                 <div class="d-flex flex-column mt-4">
                  <a href="{% url 'book-detail' book.id %}"> <button class="btn btn-primary btn-sm" type="button">Details</button></a>
                  <a href="{% url 'add-to-cart' book.id %}" ><button class="btn btn-outline-primary btn-sm mt-2" type="button">
-                    Add to wishlist
+                    Add to cart
                   </button></a>
                 </div>
               </div>
@@ -89,23 +73,11 @@
 
 
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            margin: 10;
-            padding: 10;
-            display: center;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
+       
 
-        .container {
+        .container1 {
             text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 80px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
         }
 
         .book-image {
@@ -135,7 +107,7 @@
     </style>
 
 <body>
-    <div class="container">
+    <div class="container1">
         <img src="static/green-book-opened-png-clipart-33.png" alt="Book Image" class="book-image">
         <h1>Book Not Found</h1>
         <p>Sorry, the book you are looking for could not be found.</p>
