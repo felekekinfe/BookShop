@@ -1,178 +1,30 @@
 {% extends 'base1.html' %}
 {% load crispy_forms_tags %}
 
-
-
-{% block extra_head %}
-<style>
-
-#stripeBtnLabel {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 16px;
-  font-variant: normal;
-  padding: 0;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 500;
-  display: block;
-}
-
-#stripeBtn {
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  text-decoration: none;
-  color: #fff;
-  background: #32325d;
-  white-space: nowrap;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-  text-decoration: none;
-  -webkit-transition: all 150ms ease;
-  transition: all 150ms ease;
-  float: left;
-  width: 100%
-}
-
-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
-  background-color: #43458b;
-}
-
-.stripe-form {
-  padding: 5px 30px;
-}
-
-#card-errors {
-  height: 20px;
-  padding: 4px 0;
-  color: #fa755a;
-}
-
-.stripe-form-row {
-  width: 100%;
-  float: left;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-/**
- * The CSS shown here will not be introduced in the Quickstart guide, but shows
- * how you can use CSS to style your Element's container.
- */
-.StripeElement {
-  box-sizing: border-box;
-
-  height: 40px;
-
-  padding: 10px 12px;
-
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background-color: white;
-
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
-}
-
-.StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
-}
-
-.StripeElement--invalid {
-  border-color: #fa755a;
-}
-
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
-}
-
-.current-card-form {
-  display: none;
-}
-
-</style>
-{% endblock extra_head %}
-
 {% block content %}
 
-<div class="lg:w-[53%] container-checkout flex mx-auto bg-white rounded-[19px] lg:py-2 relative"><div class="bg-white px-[0.8rem] py-[0.3rem] poppins-700 w-fit rounded-full absolute top-[-5rem] right-[-2rem] hidden lg:block cursor-pointer">x</div><div class="rounded-[17px]	scrollbar pt-[2rem] lg:pt-0 relative lg:w-[45%] lg:w-[45%] hidden lg:block" isbankpayment="true" iscardpayment="false"><div class="lg:bg-fourth relative mr-2 ml-3 rounded-[17px] flex flex-wrap lg:block lg:min-h-full"><!----><h5 class="z-40 sticky top-0 w-full hidden lg:block poppins-600 uppercase text-center text-[1.2rem] bg-secondary text-white py-3 rounded-t-[17px]">Pay with </h5><div class="w-full flex flex-wrap"><!----><div class="flex lg:block w-full"><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2 lg:bg-white lg:py-3 lg:rounded"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs border-[2px] border-primary lg:border-0 relative"><span class="block bg-primary w-fit lg:hidden text-[10px] px-[0.2rem] text-white absolute lg:relative right-[5px] top-[5px] rounded-full">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/bank-logo.svg?f8abbf4b05e4ed8aa8602967ebeaf72e" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Bank Payment </div></a></div><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs"><span class="hidden">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/card.png?15b6a096059b153716d505a9d5cc147f" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Card Payment </div></a></div></div></div><div class="hidden pt-2 pb-4 mx-10 lg:block w-full" style="display: none;"><div class="flex w-full"><input type="text" class="flex-grow border outline-none border-[#D9E0EC] rounded-l-[14px] px-3 py-2 text-[13px] placeholder:text-slate-400" placeholder="Search your Payment Method"><button class="bg-secondary px-6 rounded-r-[14px]"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M17 17L13.1396 13.1396M13.1396 13.1396C13.7999 12.4793 14.3237 11.6953 14.6811 10.8326C15.0385 9.96978 15.2224 9.04507 15.2224 8.11121C15.2224 7.17735 15.0385 6.25264 14.6811 5.38987C14.3237 4.5271 13.7999 3.74316 13.1396 3.08283C12.4793 2.42249 11.6953 1.89868 10.8326 1.54131C9.96978 1.18394 9.04507 1 8.11121 1C7.17735 1 6.25264 1.18394 5.38987 1.54131C4.5271 1.89868 3.74316 2.42249 3.08283 3.08283C1.74921 4.41644 1 6.2252 1 8.11121C1 9.99722 1.74921 11.806 3.08283 13.1396C4.41644 14.4732 6.2252 15.2224 8.11121 15.2224C9.99722 15.2224 11.806 14.4732 13.1396 13.1396Z" stroke="#EDF0F4" stroke-width="1.77778" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></div></div></div><div class="lg:flex-1 w-full"><div class="lg:pr-3 lg:ml-2"><div class="bg-secondary lg:rounded-t-[17px] rounded-b-[30px] pt-5 lg:pt-0 pb-8 relative"><div class="lg:pt-3 pb-2 lg:pb-0"><svg class="mx-auto h-[2.5rem] mb-3 mt-10 lg:h-[6rem] lg:w-[6rem]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116.73 72.08"><defs></defs><title></title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path fill-opacity="0.59" fill="#7dc242" d="M32,31.1H95.85a0,0,0,0,1,0,0v0A17.67,17.67,0,0,1,78.18,48.77H32a8.83,8.83,0,0,1-8.83-8.83v0A8.83,8.83,0,0,1,32,31.1Z"></path><path fill-opacity="0.59" fill="#7dc242" d="M31.18,7.79a7.46,7.46,0,0,0-.95.06c.63,0,1.27-.06,1.91-.06Z"></path><path fill-opacity="0.59" fill="#7dc242" d="M95.09,7.79,82.31,25.46H99.06A17.67,17.67,0,0,0,116.73,7.79Z"></path><path fill-opacity="0.59" fill="#7dc242" d="M60.7,25.19,73.28,7.79H32.15A32.12,32.12,0,0,1,60.7,25.19Z"></path><path fill="#7dc242" d="M60.83,25.46c0-.09-.08-.18-.13-.27l-.19.27Z"></path><path fill="#7dc242" d="M31.55,25.46v0c.2,0,.39,0,.59,0Z"></path><polygon fill="#7dc242" points="32.15 7.79 32.14 7.79 32.15 7.79 32.15 7.79"></polygon><path fill="#7dc242" d="M73.62,7.32l-.34.47L60.7,25.19c0,.09.09.18.13.27h-.32l-4.09,5.65L43.14,49.34A14.47,14.47,0,1,1,31.55,25.49v0h29l.19-.27A32.12,32.12,0,0,0,32.15,7.79h0c-.64,0-1.28,0-1.91.06A32.14,32.14,0,1,0,57.51,59.66l1.18-1.61h0L78.22,31.11l4.09-5.65L95.09,7.79l3.2-4.44A17.67,17.67,0,0,0,73.62,7.32Z"></path></g></g></svg></div><div class="w-full absolute"><div class="bg-white w-fit mx-auto px-9 lg:px-7 py-2 rounded-[19px] box-amount"><div class="text-center poppins-400 text-fifth text-[0.85rem]">Amount to Pay</div><h3 class="text-center poppins-700 text-2xl"><span id="tcr_bank" class="poppins-700">13</span> ETB</h3></div></div></div><div class="mt-[4.3rem] mb-5 hidden lg:block" style="display: none;"><h5 class="text-center mb-2 poppins-600 text-[1.1rem] z-10">Payment details</h5><div class="text-fifth text-center text-[0.85rem] mx-2">aa</div></div><div class="mt-[4.3rem] mb-5 hidden lg:block" style="display: none;"><h5 class="text-center mb-2 poppins-600 text-[1.1rem] z-10">Payment details</h5><div class="text-fifth text-center text-[0.85rem] mx-2">aa</div></div><form method="post" action="https://checkout.chapa.co/checkout/payment-submit/PL-0mKST8iCyfvg" class="mt-[4rem] mb-5 mx-3 lg:mx-0 lg:block"><div class="text-fifth text-center text-[0.85rem] mx-2 mb-4">No actual money is used in the test mode. Only our test cards and bank accounts can be used.</div><input type="hidden" name="type" value="test"><input type="hidden" name="crf" value="1"><input id="status-input" type="hidden" vlaue="0" name="status"><input type="hidden" name="_token" value="wyF0SU9C4PecmKbGg1vpitdJ6RwPMUVPnRFEAMyx"><input type="hidden" name="amount" value="13"><a href="https://developer.chapa.co/docs/testing-mobile/" target="_blank" class="text-primary text-[13px] text-right underline w-full block mb-2">Testing phone number</a><label class="lg:text-center w-full block text-[1.2rem] lg:text-[1rem] mb-2" for="phone_no" req="">Phone Number</label><div class="flex items-center border border-[#7a7a7a] rounded-[8px]"><div class="w-[20%] before-separator relative"><svg class="mx-auto" width="24px" height="24px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" preserveAspectRatio="xMidYMid meet"><path fill="#FCDD0A" d="M0 13h36v10H0z"></path><path fill="#088930" d="M32 5H4a4 4 0 0 0-4 4v4h36V9a4 4 0 0 0-4-4z"></path><path fill="#DA1219" d="M4 31h28a4 4 0 0 0 4-4v-4H0v4a4 4 0 0 0 4 4z"></path><circle fill="#0F47AF" cx="18" cy="18" r="9"></circle><g fill="#FCDD0A"><path d="M13.25 24.469l1.719-5.531l-2.731-1.985h1.156l3.778 2.893l-.594.359l-.922-.83l-1.468 4.406z"></path><path d="M22.609 24.469l-4.73-3.345l-2.723 1.97l.357-1.1l3.964-2.824l.158.676l-1.128.759l3.739 2.759z"></path><path d="M25.382 15.64l-4.519 3.372l1.012 3.222l-.935-.677l-1.463-4.633l.693.058l.395 1.272l3.7-2.647z"></path><path d="M17.872 10.07l1.86 5.487l3.344.05l-.933.68l-4.549-.038l.271-.642l.979-.06l-1.327-4.37zm-7.669 5.477h5.906l1.063-3.254l.358 1.098L16.012 18l-.526-.456l.476-1.372l-4.783.029zm7.526 6.765h.417v3.647h-.417zm7.847-2.087l-.128.396L22 19.466l.128-.396z"></path><path d="M22.473 11.453l.337.245l-2.177 3.021l-.337-.244zm-9.359.245l.337-.245l2.174 3.021l-.336.245zm-2.637 8.923l-.129-.396l3.454-1.155l.129.397z"></path></g></svg></div><input id="test-number" class="chk-input eth-border px-3 w-full py-2 my-1" placeholder="09********" required="" type="text"><div class="px-3"><svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="secure"><path d="M19.42,3.83,12.24,2h0A.67.67,0,0,0,12,2a.67.67,0,0,0-.2,0h0L4.58,3.83A2,2,0,0,0,3.07,5.92l.42,5.51a12,12,0,0,0,7.24,10.11l.88.38h0a.91.91,0,0,0,.7,0h0l.88-.38a12,12,0,0,0,7.24-10.11l.42-5.51A2,2,0,0,0,19.42,3.83ZM15.71,9.71l-4,4a1,1,0,0,1-1.42,0l-2-2a1,1,0,0,1,1.42-1.42L11,11.59l3.29-3.3a1,1,0,0,1,1.42,1.42Z" style="fill: rgb(125, 196, 0);"></path></svg></div></div><button type="submit" class="mt-3 bg-primary text-white py-3 w-full poppins-600 rounded-lg"> Pay using Test Mode </button><div class="rounded-[17px]	scrollbar pt-[2rem] lg:pt-0 relative lg:w-[45%] lg:w-[45%] block lg:hidden"><div class="lg:bg-fourth relative mr-2 ml-3 rounded-[17px] flex flex-wrap lg:block lg:min-h-full"><!----><h5 class="z-40 sticky top-0 w-full hidden lg:block poppins-600 uppercase text-center text-[1.2rem] bg-secondary text-white py-3 rounded-t-[17px]">Pay with </h5><div class="w-full flex flex-wrap"><!----><div class="flex lg:block w-full"><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2 lg:bg-white lg:py-3 lg:rounded"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs border-[2px] border-primary lg:border-0 relative"><span class="block bg-primary w-fit lg:hidden text-[10px] px-[0.2rem] text-white absolute lg:relative right-[5px] top-[5px] rounded-full">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/bank-logo.svg?f8abbf4b05e4ed8aa8602967ebeaf72e" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Bank Payment </div></a></div><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs"><span class="hidden">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/card.png?15b6a096059b153716d505a9d5cc147f" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Card Payment </div></a></div></div></div><div class="hidden pt-2 pb-4 mx-10 lg:block w-full" style="display: none;"><div class="flex w-full"><input type="text" class="flex-grow border outline-none border-[#D9E0EC] rounded-l-[14px] px-3 py-2 text-[13px] placeholder:text-slate-400" placeholder="Search your Payment Method"><button class="bg-secondary px-6 rounded-r-[14px]"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M17 17L13.1396 13.1396M13.1396 13.1396C13.7999 12.4793 14.3237 11.6953 14.6811 10.8326C15.0385 9.96978 15.2224 9.04507 15.2224 8.11121C15.2224 7.17735 15.0385 6.25264 14.6811 5.38987C14.3237 4.5271 13.7999 3.74316 13.1396 3.08283C12.4793 2.42249 11.6953 1.89868 10.8326 1.54131C9.96978 1.18394 9.04507 1 8.11121 1C7.17735 1 6.25264 1.18394 5.38987 1.54131C4.5271 1.89868 3.74316 2.42249 3.08283 3.08283C1.74921 4.41644 1 6.2252 1 8.11121C1 9.99722 1.74921 11.806 3.08283 13.1396C4.41644 14.4732 6.2252 15.2224 8.11121 15.2224C9.99722 15.2224 11.806 14.4732 13.1396 13.1396Z" stroke="#EDF0F4" stroke-width="1.77778" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></div></div></div></form><!----><!----><div style="display: none;"><form class="paymentWidgets" action="https://checkout.chapa.co/checkout/card-payment-submit/PL-0mKST8iCyfvg/1" method="get" data-brands="VISA MASTER UNIONPAY"></form><div class="rounded-[17px]	scrollbar pt-[2rem] lg:pt-0 relative lg:w-[45%] lg:w-[45%] block lg:hidden"><div class="lg:bg-fourth relative mr-2 ml-3 rounded-[17px] flex flex-wrap lg:block lg:min-h-full"><!----><h5 class="z-40 sticky top-0 w-full hidden lg:block poppins-600 uppercase text-center text-[1.2rem] bg-secondary text-white py-3 rounded-t-[17px]">Pay with </h5><div class="w-full flex flex-wrap"><!----><div class="flex lg:block w-full"><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2 lg:bg-white lg:py-3 lg:rounded"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs border-[2px] border-primary lg:border-0 relative"><span class="block bg-primary w-fit lg:hidden text-[10px] px-[0.2rem] text-white absolute lg:relative right-[5px] top-[5px] rounded-full">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/bank-logo.svg?f8abbf4b05e4ed8aa8602967ebeaf72e" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Bank Payment </div></a></div><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs"><span class="hidden">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/card.png?15b6a096059b153716d505a9d5cc147f" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Card Payment </div></a></div></div></div><div class="hidden pt-2 pb-4 mx-10 lg:block w-full" style="display: none;"><div class="flex w-full"><input type="text" class="flex-grow border outline-none border-[#D9E0EC] rounded-l-[14px] px-3 py-2 text-[13px] placeholder:text-slate-400" placeholder="Search your Payment Method"><button class="bg-secondary px-6 rounded-r-[14px]"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M17 17L13.1396 13.1396M13.1396 13.1396C13.7999 12.4793 14.3237 11.6953 14.6811 10.8326C15.0385 9.96978 15.2224 9.04507 15.2224 8.11121C15.2224 7.17735 15.0385 6.25264 14.6811 5.38987C14.3237 4.5271 13.7999 3.74316 13.1396 3.08283C12.4793 2.42249 11.6953 1.89868 10.8326 1.54131C9.96978 1.18394 9.04507 1 8.11121 1C7.17735 1 6.25264 1.18394 5.38987 1.54131C4.5271 1.89868 3.74316 2.42249 3.08283 3.08283C1.74921 4.41644 1 6.2252 1 8.11121C1 9.99722 1.74921 11.806 3.08283 13.1396C4.41644 14.4732 6.2252 15.2224 8.11121 15.2224C9.99722 15.2224 11.806 14.4732 13.1396 13.1396Z" stroke="#EDF0F4" stroke-width="1.77778" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></div></div></div></div><div class="mt-[4rem] lg:mt-0 px-5 lg:px-0" style="display: none;"><div class="mt-[4.3rem] mb-5 hidden lg:block" style="display: none;"><h5 class="text-center mb-2 poppins-600 text-[1.1rem] z-10">Payment details</h5><div class="text-fifth text-center text-[0.85rem] mx-2">aa</div></div><div class="mt-[4.3rem] mb-5 hidden lg:block" style="display: none;"><h5 class="text-center mb-2 poppins-600 text-[1.1rem] z-10">Payment details</h5><div class="text-fifth text-center text-[0.85rem] mx-2">aa</div></div><div><form action="" method="POST" id="card-form"><input type="hidden" name="_token" value="wyF0SU9C4PecmKbGg1vpitdJ6RwPMUVPnRFEAMyx"><input type="hidden" name="amount" value="13"><input type="hidden" name="crf" value="1"><div class="mb-3"><div class="flex items-center border border-[#7a7a7a] rounded-[8px] mt-3"><input class="chk-input eth-border px-3 w-full py-2 my-1" name="name" placeholder="Your Name"></div><!----><div class="flex items-center border border-[#7a7a7a] rounded-[8px] mt-3"><input class="chk-input eth-border px-3 w-full py-2 my-1" type="email" name="email" placeholder="Your Email"></div><!----><div class="flex items-center border border-[#7a7a7a] rounded-[8px] mt-3"><div class="w-full flex items-center min-h-[3.1rem] px-3 py-2 StripeElement StripeElement--empty" id="card"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: medium none !important; display: block !important; background: transparent none repeat scroll 0% 0% !important; position: relative !important; opacity: 1 !important;"><iframe name="__privateStripeFrame8856" allowtransparency="true" scrolling="no" role="presentation" src="https://js.stripe.com/v3/elements-inner-card-3a5e55912a04f48eb1915aaa459a0828.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=7896f45f-aad0-4932-9ebe-b01ffdb001870d59c8&amp;mids[sid]=33083374-bfb8-4557-8b4a-f1cc25ac95981f373f&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23E3E3E3&amp;rtl=false&amp;componentName=card&amp;keyMode=live&amp;apiKey=pk_live_51KgZB3KscIp4Rkf0z6VFcDABqM3GUyLEx5jYtjHim3Yq2JegqeEHrq8FZJkLGKGky9oNbmu1a3jVuBo4b0nlydqA00UHKxGw1V&amp;referrer=https%3A%2F%2Fcheckout.chapa.co%2Fcheckout%2Fweb%2Fpayment%2FPL-0mKST8iCyfvg&amp;controllerId=__privateStripeController8851" title="Secure card payment input frame" style="border: medium none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 19.2px;" frameborder="0"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: medium none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent none repeat scroll 0% 0% !important; pointer-events: none !important; font-size: 16px !important;"></div></div></div><!----><button type="submit" class="mt-3 bg-primary text-white py-3 w-full poppins-600 rounded-lg">Pay With Card</button></div></form></div><div class="rounded-[17px]	scrollbar pt-[2rem] lg:pt-0 relative lg:w-[45%] lg:w-[45%] block lg:hidden"><div class="lg:bg-fourth relative mr-2 ml-3 rounded-[17px] flex flex-wrap lg:block lg:min-h-full"><!----><h5 class="z-40 sticky top-0 w-full hidden lg:block poppins-600 uppercase text-center text-[1.2rem] bg-secondary text-white py-3 rounded-t-[17px]">Pay with </h5><div class="w-full flex flex-wrap"><!----><div class="flex lg:block w-full"><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2 lg:bg-white lg:py-3 lg:rounded"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs border-[2px] border-primary lg:border-0 relative"><span class="block bg-primary w-fit lg:hidden text-[10px] px-[0.2rem] text-white absolute lg:relative right-[5px] top-[5px] rounded-full">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/bank-logo.svg?f8abbf4b05e4ed8aa8602967ebeaf72e" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Bank Payment </div></a></div><div class="lg:border-b lg:border-white w-1/2 lg:w-full md:w-1/4"><a class="block lg:flex lg:items-center my-3 mx-2"><div class="lg:w-4/12 px-3 py-5 lg:p-0 rounded-[14px] lg:rouned-[0px] box-shadow-logo-rs"><span class="hidden">✔</span><img src="https://d1a85gsjeabvpg.cloudfront.net/9f832b4a-d292-443f-95b7-5a4def45ab68/images/card.png?15b6a096059b153716d505a9d5cc147f" class="h-[35px] lg:h-[35px] lg:float-right mx-auto"></div><div class="text-[13px] lg:text-[1rem] lg:w-8/12 lg:ml-4 text-center lg:text-left mt-3 lg:mt-0">Test Card Payment </div></a></div></div></div><div class="hidden pt-2 pb-4 mx-10 lg:block w-full" style="display: none;"><div class="flex w-full"><input type="text" class="flex-grow border outline-none border-[#D9E0EC] rounded-l-[14px] px-3 py-2 text-[13px] placeholder:text-slate-400" placeholder="Search your Payment Method"><button class="bg-secondary px-6 rounded-r-[14px]"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M17 17L13.1396 13.1396M13.1396 13.1396C13.7999 12.4793 14.3237 11.6953 14.6811 10.8326C15.0385 9.96978 15.2224 9.04507 15.2224 8.11121C15.2224 7.17735 15.0385 6.25264 14.6811 5.38987C14.3237 4.5271 13.7999 3.74316 13.1396 3.08283C12.4793 2.42249 11.6953 1.89868 10.8326 1.54131C9.96978 1.18394 9.04507 1 8.11121 1C7.17735 1 6.25264 1.18394 5.38987 1.54131C4.5271 1.89868 3.74316 2.42249 3.08283 3.08283C1.74921 4.41644 1 6.2252 1 8.11121C1 9.99722 1.74921 11.806 3.08283 13.1396C4.41644 14.4732 6.2252 15.2224 8.11121 15.2224C9.99722 15.2224 11.806 14.4732 13.1396 13.1396Z" stroke="#EDF0F4" stroke-width="1.77778" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div></div></div></div></div></div></div></div><div class="text-[0.7rem] top-0 right-0 bg-white mr-5 lg:hidden block poppins-700 py-1 px-2 mt-4 absolute rounded-full cursor-pointer">x</div><div class="flex mt-2 mb-6 lg:text-white items-center justify-center"><svg class="mx-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 9 12" fill="none"><path d="M4.49996 9.20842C4.21264 9.20842 3.93709 9.09428 3.73393 8.89111C3.53076 8.68795 3.41663 8.4124 3.41663 8.12508C3.41663 7.52383 3.89871 7.04175 4.49996 7.04175C4.78728 7.04175 5.06283 7.15589 5.26599 7.35905C5.46916 7.56221 5.58329 7.83776 5.58329 8.12508C5.58329 8.4124 5.46916 8.68795 5.26599 8.89111C5.06283 9.09428 4.78728 9.20842 4.49996 9.20842ZM7.74996 10.8334V5.41675H1.24996V10.8334H7.74996ZM7.74996 4.33341C8.03728 4.33341 8.31283 4.44755 8.51599 4.65072C8.71916 4.85388 8.83329 5.12943 8.83329 5.41675V10.8334C8.83329 11.1207 8.71916 11.3963 8.51599 11.5994C8.31283 11.8026 8.03728 11.9167 7.74996 11.9167H1.24996C0.962641 11.9167 0.687091 11.8026 0.483927 11.5994C0.280763 11.3963 0.166626 11.1207 0.166626 10.8334V5.41675C0.166626 4.8155 0.648709 4.33341 1.24996 4.33341H1.79163V3.25008C1.79163 2.53179 2.07697 1.84291 2.58488 1.335C3.09279 0.827089 3.78166 0.541748 4.49996 0.541748C4.85562 0.541748 5.2078 0.611801 5.53639 0.747908C5.86498 0.884014 6.16355 1.08351 6.41504 1.335C6.66653 1.58649 6.86603 1.88506 7.00213 2.21365C7.13824 2.54224 7.20829 2.89442 7.20829 3.25008V4.33341H7.74996ZM4.49996 1.62508C4.06898 1.62508 3.65566 1.79629 3.35091 2.10103C3.04616 2.40578 2.87496 2.8191 2.87496 3.25008V4.33341H6.12496V3.25008C6.12496 2.8191 5.95375 2.40578 5.64901 2.10103C5.34426 1.79629 4.93094 1.62508 4.49996 1.62508Z" class="svg-secure"></path></svg> <span class="poppins-300 text-[0.95rem] lg:text-[1rem]">Secured By Chapa</span></div>
-
-{% comment %} <main >
-  <div class="container wow fadeIn">
-
-    <h2 class="my-5 h2 text-center">Payment</h2>
-
-    <div class="row">
-
-      <div class="col-md-12 mb-4">
-        <div class="card">
-
-          {% comment %} {% if card %} {% endcomment %}
-            <div style="padding: 5px 30px;">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="use_default_card" id="use_default_card">
-                <label class="custom-control-label" for="use_default_card">Use default card:
-                  **** **** **** {{ card.last4 }} 
-                <span>Exp: {{ card.exp_month }}/{{ card.exp_year }}</span></label>
-              </div>
-            </div>
-          {% comment %} {% endif %} {% endcomment %}
-
-          <div class="current-card-form">
-            <form action="." method="post" class="stripe-form">
-                {% csrf_token %}
-                <input type="hidden" name="use_default" value="true">
-                <div class="stripe-form-row">
-                  <button id="stripeBtn">Submit Payment</button>
-                </div>
-                <div id="card-errors" role="alert"></div>
-            </form>
-          </div>
-
-          <div class="new-card-form">
-            <form action="." method="post" class="stripe-form" id="stripe-form">
-                {% csrf_token %}
-                <div class="stripe-form-row" id="creditCard">
-                    <label for="card-element" id="stripeBtnLabel">
-                        Credit or debit card
-                    </label>
-                    <div id="card-element" class="StripeElement StripeElement--empty"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeFrame5" allowpaymentrequest="true" src="https://js.stripe.com/v3/elements-inner-card-19066928f2ed1ba3ffada645e45f5b50.html#style[base][color]=%2332325d&amp;style[base][fontFamily]=%22Helvetica+Neue%22%2C+Helvetica%2C+sans-serif&amp;style[base][fontSmoothing]=antialiased&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23aab7c4&amp;style[invalid][color]=%23fa755a&amp;style[invalid][iconColor]=%23fa755a&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1" title="Secure payment input frame" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; height: 19.2px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
-                </div>
-                <div class="stripe-form-row">
-                  <button id="stripeBtn">Submit Payment</button>
-                </div>
-                <div class="stripe-form-row">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="save" id="save_card_info">
-                    <label class="custom-control-label" for="save_card_info">Save for future purchases</label>
-                  </div>
-                </div>
-                <div id="card-errors" role="alert"></div>
-            </form>
-          </div>
-
-        </div>
-      </div>
-
-      {% comment %} {% include "order_snippet.html" %} {% endcomment %}
-
-    </div>
-
-  </div>
-</main>
+<form method="POST" action="https://api.chapa.co/v1/hosted/pay" >
+  <input type="hidden" name="public_key" value="CHAPUBK_TEST-hil3TopFGmNl8N6qXiOGl0MLGDVsBZeu" />
+  <input type="hidden" name="tx_ref" value="negade-tx-12345678sss9" />
+  <input  name="amount" value="{{data.amount}}" />
+  <input type="hidden" name="currency" value="ETB" />
+  <input  name="email" value="israel@negade.et" />
+  <input  name="first_name" value="Israel" />
+  <input  name="last_name" value="Goytom" />
+  <input type="hidden" name="title" value="Let us do this" />
+  <input type="hidden" name="description" value="Paying with Confidence with cha" />
+  <input type="hidden" name="logo" value="https://chapa.link/asset/images/chapa_swirl.svg" />
+  <input type="hidden" name="callback_url" value="https://example.com/callbackurl" />
+  <input type="hidden" name="return_url" value="https://example.com/returnurl" />
+  <input type="hidden" name="meta[title]" value="test" />
+  <button type="submit">Pay Now</button>
+</form>
 {% endblock content %}
 
 
-{% block extra_scripts %}
+
+
+
 
 {% comment %} <script src="https://js.stripe.com/v3/"></script>
 <script nonce="">  // Create a Stripe client.
@@ -261,4 +113,3 @@ button:hover {
 
 </script> {% endcomment %}
 
-{% endblock extra_scripts %}

@@ -22,7 +22,7 @@ class BookDetail(DetailView):
     model=Item
     template_name="book_detail.html"
 
-class CheckoutView(View,ObjectDoesNotExist):
+class CheckoutView(View,ObjectDoesNotExist,BaseException):
 
     def get(self,*args,**kwargs):
         form=CheckoutForm()
@@ -67,22 +67,36 @@ class CheckoutView(View,ObjectDoesNotExist):
                     #redirect to payment/p
                # else:
                      #redirect to payment/y
-                return redirect('checkout')
+                return redirect('payment')
+            else:
 
-            messages.warning(self.request, "Failed checkout")
-            return redirect('checkout')
+                messages.warning(self.request, "Failed checkout")
+                return redirect('checkout')
             
         except ObjectDoesNotExist():
             messages.error(self.request,'you dont have active order')
             return redirect('order_summary')
         
 
-class PaymentView(View):
-    def get(self,*args,**kwargs):
-        return render(self.request, "payment.html")
+def payment(request,data):
+        json_data = {
+            'amount': data.over_all_total_price,
+            'currency': 'Birr',
+            'email': request.user.email,
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'tx_ref': data.id,
+            'callback_url': 'www.google.com',
+            'customization[title]': 'book payment',
+            'customization[description]': "total book payment....",
+            'phone_number': request.user.phone
+        }
+
+        return render(request, 'payment.html',{'data':json_data})
 
 
-class OrderSummary(LoginRequiredMixin,View):
+
+class OrderSummary(LoginRequiredMixin,View,ObjectDoesNotExist):
     def get(self,*args,**kwargs):
         try:
             order=Order.objects.get(user=self.request.user,ordered=False)

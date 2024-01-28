@@ -62,9 +62,24 @@
 
         <tr>
           <td colspan="5">
-            <a class="btn btn-warning float-right ml-2" href="checkout">Proceed ro checkout</a>
+            <form method="POST" action="https://api.chapa.co/v1/hosted/pay" >
+              <input type="hidden" name="public_key" value="CHAPUBK_TEST-hil3TopFGmNl8N6qXiOGl0MLGDVsBZeu" />
+              <input type="hidden" name="tx_ref" value="{{orders.trx}}" />
+              <input  type="hidden" name="amount" value="{{orders.over_all_total_price}}" />
+              <input type="hidden" name="currency" value="ETB" />
+              <input  type="hidden" name="email" value="{{request.user.email}}" />
+              <input  type="hidden" name="first_name" value="{{request.user.first_name}}" />
+              <input  type="hidden" name="last_name" value="{{request.user.last_name}}" />
+              <input type="hidden" name="title" value="book payment" />
+              <input type="hidden" name="description" value="books....." />
+              <input type="hidden" name="logo" value="https://chapa.link/asset/images/chapa_swirl.svg" />
+              <input type="hidden" name="callback_url" value="https://example.com/callbackurl" />
+              <input type="hidden" name="return_url" value="https://example.com/returnurl" />
+              <input type="hidden" name="meta[title]" value="test" />
+              <button  class="btn btn-warning float-right ml-2" type="submit">Pay Now</button>
+            </form>
             <a class="btn btn-primary float-right" href="/">Continue Shoping</a></td>
-          
+            
         </tr>
         {% endif %}
         

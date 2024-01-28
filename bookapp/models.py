@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from account.models import Account
 from django.urls import reverse
 from django_countries.fields import CountryField
+from uuid import uuid4
+
 CATEGORY=(
     ('fi','Fiction'),
     ('sc-tech','Science & Technology'),
@@ -72,6 +74,7 @@ class OrderItem(models.Model):
  
 
 class Order(models.Model):
+    trx= models.UUIDField(primary_key=False, default=uuid4)
     user=models.ForeignKey(Account, on_delete=models.CASCADE)
     items=models.ManyToManyField(OrderItem)
     start_date=models.DateTimeField(auto_now_add=True)
