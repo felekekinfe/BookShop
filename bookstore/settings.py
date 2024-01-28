@@ -44,17 +44,17 @@ INSTALLED_APPS = [
     'django_countries',
     'crispy_forms',
     "crispy_bootstrap4",
-    "dj_chapa",
+    
     "admin_interface",
     'colorfield'
 ]
 
 
-CHAPA_SECRET = "CHAPUBK_TEST-hil3TopFGmNl8N6qXiOGl0MLGDVsBZeu"
-CHAPA_API_URL =  'https://api.chapa.co'
-CHAPA_WEBHOOK_URL = 'CHAPA_WEBHOOK_URL'
-CHAPA_API_VERSION = 'v1'
-CHAPA_TRANSACTION_MODEL = 'dj_chapa.ChapaTransaction'
+# CHAPA_SECRET = "CHAPUBK_TEST-hil3TopFGmNl8N6qXiOGl0MLGDVsBZeu"
+# CHAPA_API_URL =  'https://api.chapa.co'
+# CHAPA_WEBHOOK_URL = 'CHAPA_WEBHOOK_URL'
+# CHAPA_API_VERSION = 'v1'
+# CHAPA_TRANSACTION_MODEL = 'dj_chapa.ChapaTransaction'
 
 
 
