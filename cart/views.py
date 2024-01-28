@@ -71,7 +71,7 @@ def add_to_cart(request, pk):
         messages.info(request, "Book Added to Your Cart!")
 
     #print(f"Final quantity for item {item.id}: {order_item.quantity}")
-    return redirect('book-detail', pk=pk)
+    return redirect('home')
 
 
 def remove_from_cart(request,pk):

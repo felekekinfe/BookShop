@@ -3,29 +3,21 @@ from django.contrib.auth.models import User
 from account.models import Account
 from django.urls import reverse
 from django_countries.fields import CountryField
-from uuid import uuid4
+import uuid
+
 
 CATEGORY=(
-    ('fi','Fiction'),
-    ('sc-tech','Science & Technology'),
-    ('po','Poetry'),
-    ('his','History'),
-    ('pol','Polotics'),
-    ('phi','Philosophy'),
-    ('phys','Psycology'),
-    ('sh','Self Help')
+    ('Fiction','Fiction'),
+    ('Science & Technology','Science & Technology'),
+    ('Poetry','Poetry'),
+    ('History','History'),
+    ('Polotics','Polotics'),
+    ('Philosophy','Philosophy'),
+    ('Psycology','Psycology'),
+    ('Self Help','Self Help')
 )
 
-LABEL=(
-    ('P','primary'),
-    ('S','secondary'),
-    ('D','danger'),
-    ('his','History'),
-    ('pol','Polotics'),
-    ('phi','Philosophy'),
-    ('phys','Psycology'),
-    ('sh','Self Help')
-)
+
 
 
 # Create your models here.
@@ -38,7 +30,7 @@ class Item(models.Model):
     price=models.FloatField()
     discount_price=models.FloatField(blank=True,null=True)
     category=models.CharField(choices=CATEGORY, max_length=100)
-    label=models.CharField(choices=LABEL,max_length=100)
+
     image=models.ImageField(upload_to='book_image/')
 
     def __str__(self):
@@ -74,17 +66,23 @@ class OrderItem(models.Model):
  
 
 class Order(models.Model):
-    trx= models.UUIDField(primary_key=False, default=uuid4)
+    
     user=models.ForeignKey(Account, on_delete=models.CASCADE)
     items=models.ManyToManyField(OrderItem)
     start_date=models.DateTimeField(auto_now_add=True)
     ordered_date=models.DateTimeField(auto_now_add=True)
     ordered=models.BooleanField(default=False)
-    billing_address=models.ForeignKey("BillingAddress", on_delete=models.SET_NULL, blank=True,null=True)
+    #billing_address=models.ForeignKey("BillingAddress", on_delete=models.SET_NULL, blank=True,null=True)
 
     
     def __str__(self):
         return self.user.username
+    
+    def trx(self):
+        unique_number = uuid.uuid4()
+
+        return unique_number
+
 
     
     
@@ -102,19 +100,19 @@ class Order(models.Model):
 
 
 
-class BillingAddress(models.Model):
-    user=models.ForeignKey(Account, on_delete=models.CASCADE)
+# class BillingAddress(models.Model):
+#     user=models.ForeignKey(Account, on_delete=models.CASCADE)
 
 
 
 
-    street_address=models.CharField(max_length=100)
-    house_address=models.CharField(max_length=100)
-    countries=CountryField(multiple=True)
-    zip_code=models.CharField(max_length=100)
+#     street_address=models.CharField(max_length=100)
+#     house_address=models.CharField(max_length=100)
+#     countries=CountryField(multiple=True)
+#     zip_code=models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
 
 
 

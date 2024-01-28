@@ -17,11 +17,11 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
-from bookapp.admin import custom
+from bookapp.admin import custom_admin_site
 
 urlpatterns = [
     path('chapa-webhook', include('dj_chapa.urls')),
-    path('admin/',custom.urls),
+    path('admin/', custom_admin_site.urls),
     path('',include('bookapp.urls')),
     path('',include('cart.urls')),
     path('',include('account.urls')),
