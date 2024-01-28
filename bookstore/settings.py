@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=akyxil2pj0zayyf9ykvoit=77r#p@u0dd0zb!6#b9iefv8s#t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cc36-196-189-183-217.ngrok.io', '*']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'bookstore.urls'
@@ -139,7 +140,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT=BASE_DIR/'media'
 MEDIA_URL='/media/'
-
+STATIC_ROOT='staticfiles'
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
