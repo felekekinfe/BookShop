@@ -3,220 +3,107 @@
 
 
 
-<style>
-    .navbar {
-        padding-top: 0.5rem; 
-        padding-bottom: 0.1rem; 
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookShop</title>
 
-    .navbar-brand {
-        padding: 20px; 
-       
-    }
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 
-    .navbar-brand img {
-        max-height: 20px; 
-    }
+    <!-- Font Awesome CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    .navbar-nav .nav-link {
-        padding: 0.5rem 1rem; 
-    }
-
-.bloc_left_price {
-    color: #c01508;
-    text-align: center;
-    font-weight: bold;
-    font-size: 150%;
-}
-.category_block li:hover {
-    background-color: #007bff;
-}
-.category_block li:hover a {
-    color: #ffffff;
-}
-.category_block li a {
-    color: #343a40;
-}
-.add_to_cart_block .price {
-    color: #c01508;
-    text-align: center;
-    font-weight: bold;
-    font-size: 200%;
-    margin-bottom: 0;
-}
-.add_to_cart_block .price_discounted {
-    color: #343a40;
-    text-align: center;
-    text-decoration: line-through;
-    font-size: 140%;
-}
-.product_rassurance {
-    padding: 10px;
-    margin-top: 15px;
-    background: #ffffff;
-    border: 1px solid #6c757d;
-    color: #6c757d;
-}
-.product_rassurance .list-inline {
-    margin-bottom: 0;
-    text-transform: uppercase;
-    text-align: center;
-}
-.product_rassurance .list-inline li:hover {
-    color: #343a40;
-}
-.reviews_product .fa-star {
-    color: gold;
-}
-.pagination {
-    margin-top: 20px;
-}
-footer {
-    background: #343a40;
-    padding: 40px;
-}
-footer a {
-    color: #f8f9fa!important
-}
-
-</style>
+    <!-- Custom Styles -->
+    <style>
+        /* Custom styles for the navbar logo */
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff; /* White color for the text logo */
+        }
+        /* Additional custom styles */
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <!-- Navbar brand/logo as text -->
+            <!-- Navbar Brand/Logo -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'book-clipart-transparent-17.png' %}" alt="" style="height: 30px; width: auto; margin-right: 5px;">
+                BookShop
+            </a>
 
 
+            <!-- Navbar toggler button for mobile -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
 
-
-
-
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-<!------ Include the above in your HEAD tag ---------->
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
-    
-
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">Menu</a>
-    
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      {% if user.is_authenticated %}
-        <li><a class="dropdown-item" href="{% url 'profile_edit' %}">Edit Profile</a></li>
-        <li><a class="dropdown-item" href="{% url 'change_password' %}">Edit Password</a></li>
-        <li><a class="dropdown-item" href="{% url 'about-us' %}">About Us</a></li>
-        <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
-        {% if user.is_staff %}
-        <li><a class="dropdown-item" href="admin/">admin</a></li>
-        {% endif %}
-      {% else %}
-        <li><a class="dropdown-item" href="{% url 'login_page' %}">Login</a></li>
-        <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
-        <li><a class="dropdown-item" href="#">About Us</a></li>
-      {% endif %}
-        
-        
-    </ul>
-
-
-    
-
-    
-
-    <!-- ... (previous code) ... -->
-
-<div class="container">
-    
-    <div class="container" > <!-- Increase the margin-top value -->
-        <a class="" href="{% url 'home' %}">
-            <img src="{% static 'book-clipart-transparent-17.png' %}" alt="Logo" width='100' height='70'>
-        </a>
-    </div>
-    
-    
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-        <ul class="navbar-nav m-auto">
-            <li class="nav-item m-auto">
-                <b><a class="nav-link" href="{% url 'home' %}">Home</a></b>
-            </li>
-            
-            {% comment %} <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">Category</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">fiction</a></li>
-                    <li><a class="dropdown-item" href="#">poletics</a></li>
-                    <li><a class="dropdown-item" href="#">science</a></li>
-                    <li><a class="dropdown-item" href="#">psycology</a></li>
+                    <!-- Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if user.is_authenticated %}
+                            <a class="dropdown-item" href="{% url 'profile_edit' %}">Edit Profile</a>
+                            <a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a>
+                            <a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a>
+                            {% if user.is_staff %}
+                            <a class="dropdown-item" href="admin/">Admin</a>
+                            {% endif %}
+                            {% else %}
+                            <a class="dropdown-item" href="{% url 'login_page' %}">Login</a>
+                            <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+                            {% endif %}
+                        </div>
+                    </li>
                 </ul>
-            </li> {% endcomment %}
-        </ul>
 
-        <!-- ... (previous code) ... -->
+                <!-- Search form -->
+                <form class="form-inline my-2 my-lg-0 mr-2" method='GET' action="{% url 'search_book' %}">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
 
-  
-
-
-
-
-            <form class="form-inline my-2 my-lg-0" method='GET' action="{% url 'search_book' %}">
-                {% csrf_token %}
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" name='query' aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Book title...">
-                    <div class="input-group-append">
-                        <button type="submit" class="fa fa-search" class="btn btn-secondary btn-number">
-                       
-                        </button>
-                    </div>
-                </div>
-                
-            </form>
-            {% if request.user.is_authenticated %}
-            <a class="btn btn-success btn-sm ml-3" href="{% url 'order_summary' %}">
-                <i class="fa fa-shopping-cart"></i> <b>Cart</b>
-                <span class="badge badge-light">{{request.user|cart_book_count}}</span>
-            </a>
-            {% else %}
-            <a class="btn btn-success btn-sm ml-3" href="{% url 'home' %}">
-                <i class="fa fa-shopping-cart"></i> <b>Cart</b>
-                <span class="badge badge-light">{{request.user|cart_book_count}}</span>
-            </a>
-            {% endif %}
+                <!-- Cart icon -->
+                <a class="btn btn-success btn-sm" href="{% url 'order_summary' %}">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="badge badge-light">{{ request.user|cart_book_count }}</span>
+                </a>
+            </div>
         </div>
+    </nav>
+
+    <!-- Page content -->
+    <div class="container">
+        <!-- Your page content goes here -->
+        {% block content %}
+        {% endblock %}
     </div>
-</nav>
 
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <!-- Footer content goes here -->
+            &copy; 2024 Your Website. All rights reserved.
+        </div>
+    </footer>
 
-
-{% block content %}
-
-{% endblock content %}
-
-<!-- Remove the container if you want to extend the Footer to full width. -->
-
-
-    
-  <!-- End of .container -->
-
-  <!-- Remove the container if you want to extend the Footer to full width. -->
-<div class="container my-4">
-
-    <footer class="bg-white text-center text-gray">
-    <!-- Grid container -->
-  
-      
-    </div>
-    
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2024 Copyright: <b>Made with <span style="color: red;">❤</span></b>
-    </div>
-    <!-- Copyright -->
-  </footer>
-    
-  </div>
-  <!-- End of .container -->
-
-
+    <!-- Bootstrap JS, jQuery, and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
