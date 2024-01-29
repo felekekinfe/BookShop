@@ -8,65 +8,73 @@
 
 
 {% if books %}
-{% for book in books%}
+{% for book in books %}
 <section style="background-color: #eee;">
-  
-    
-      <div class="col-md-12 col-xl-10">
-        <div class="card shadow-0 border rounded-3">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
-                <div class="bg-image hover-zoom ripple rounded ripple-surface">
-                  <img src="{{book.image.url}}" width='100' height='200'/>
-                  <a href="#!">
-                    <div class="hover-overlay">
-                      <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+            <div class="card shadow-0 border rounded-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                            <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                <img src="{{ book.image.url }}" width='100' height='200'/>
+                                <a href="#!">
+                                    <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <h5>{{ book.title }}</h5>
+                            <div class="d-flex flex-row">
+                                <div class="text-danger mb-1 me-2">
+                                    <!-- Star ratings (if any) -->
+                                </div>
+                            </div>
+                            <div class="mt-1 mb-0 text-muted small">
+                                <span>{{ book.author }}</span>
+                                <span class="text-primary"> • </span>
+                                <span>{{ book.category }}</span>
+                                <span class="text-primary"> • </span>
+                                <!-- Additional info -->
+                            </div>
+                            <p class="text-truncate mb-4 mb-md-0">
+                                {{ book.description }}
+                            </p>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                            <div class="d-flex flex-row align-items-center mb-1">
+                                {% if book.discount_price %}
+                                    <h4 class="mb-1 me-1">{{ book.price }} Birr</h4>
+                                    <span class="text-danger"><s>{{ book.discount_price }} Birr</s></span>
+                                {% else %}
+                                    <h4 class="mb-1 me-1">{{ book.price }} Birr</h4>
+                                {% endif %}
+                            </div>
+                            <h6 class="text-success">Free shipping</h6>
+                            <div class="d-flex flex-column mt-4">
+                                <a href="{% url 'book-detail' book.id %}">
+                                    <button class="btn btn-primary btn-sm" type="button">Details</button>
+                                </a>
+                                {% if request.user.is_authenticated %}
+                                    <a href="{% url 'add-to-cart' book.id %}">
+                                        <button class="btn btn-outline-primary btn-sm mt-2" type="button">
+                                            Add to cart
+                                        </button>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                  </a>
                 </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-6">
-                <h5>{{book.title}}</h5>
-               
-                <div class="mt-1 mb-0 text-muted small">
-                  <span>{{book.author}}</span>
-                  <span class="text-primary"> • </span>
-                  <span>{{book.category}}</span>
-                  
-                </div>
-               
-                <p class="text-truncate mb-4 mb-md-0">
-                  {{book.description}}
-                </p>
-              </div>
-              <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
-                <div class="d-flex flex-row align-items-center mb-1">
-                  {% if book.discount_price %}
-                  <h4 class="mb-1 me-1">{{book.price}}</h4>
-                  <span class="text-danger"><s>{{book.discount_price}}</s></span>
-                  {% else %}
-                   <h4 class="mb-1 me-1">{{book.price}}</h4>
-                  {% endif %}
-                 
-                  
-                </div>
-                <h6 class="text-success">Free shipping</h6>
-                <div class="d-flex flex-column mt-4">
-                 <a href="{% url 'book-detail' book.id %}"> <button class="btn btn-primary btn-sm" type="button">Details</button></a>
-                 <a href="{% url 'add-to-cart' book.id %}" ><button class="btn btn-outline-primary btn-sm mt-2" type="button">
-                    Add to cart
-                  </button></a>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-   
 </section>
 {% endfor %}
+
+
 
 {% else %}
 

@@ -73,15 +73,23 @@
                 <!-- Search form -->
                 <form class="form-inline my-2 my-lg-0 mr-2" method='GET' action="{% url 'search_book' %}">
                     {% csrf_token %}
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='query'>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
                 <!-- Cart icon -->
+                {% if user.is_authenticated  %}
                 <a class="btn btn-success btn-sm" href="{% url 'order_summary' %}">
                     <i class="fa fa-shopping-cart"></i> Cart
                     <span class="badge badge-light">{{ request.user|cart_book_count }}</span>
                 </a>
+                {% else %}
+                <a class="btn btn-success btn-sm" href="{% url 'home' %}">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="badge badge-light">{{ request.user|cart_book_count }}</span>
+                </a>
+
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -90,16 +98,32 @@
     <div class="container">
         <!-- Your page content goes here -->
         {% block content %}
-        {% endblock %}
-    </div>
+        {% endblock content%}
+        <div class="container my-4">
+
+            <footer class="bg-white text-center text-gray">
+            <!-- Grid container -->
+          
+              
+            </div>
+            
+            <div class="text-center p-9" style="background-color: rgba(0, 0, 0, 0.2);">
+              © 2024 Copyright: <b>Made with <span style="color: red;">❤</span></b>
+            </div>
+            <!-- Copyright -->
+          </footer>
+            
+          </div>
+
+    
+    
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <!-- Footer content goes here -->
-            &copy; 2024 Your Website. All rights reserved.
-        </div>
-    </footer>
+    
+      <!-- End of .container -->
+    
+    
+    
 
     <!-- Bootstrap JS, jQuery, and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
