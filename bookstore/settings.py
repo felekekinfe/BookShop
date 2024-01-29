@@ -140,7 +140,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT=BASE_DIR/'media'
 MEDIA_URL='/media/'
-STATIC_ROOT='bookapp/staticfiles'
+STATIC_ROOT=BASE_DIR/'bookapp/staticfiles'
 STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
