@@ -14,7 +14,8 @@ CATEGORY=(
     ('Polotics','Polotics'),
     ('Philosophy','Philosophy'),
     ('Psycology','Psycology'),
-    ('Self Help','Self Help')
+    ('Self Help','Self Help'),
+    ('Biography','Biography')
 )
 
 
